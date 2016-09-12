@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery.js"></script>
+<script src="js/seedrandom.js"></script>
+<style>
+    body{
+        position:relative;
+        margin:auto;
+        background-image:url("gradientBlue.png");
+        background-repeat:repeat-x;
+        top:75px;
+
+    }
+#randomTable {
+    font-family: monospace;
+    font-size: 2.0em;
+    
+    top:60px;
+    left:50px;
+    position:relative;
+    background-color:aqua;
+  
+    
+}
+
+.box {
+	position: fixed;
+	min-height:200px;
+    top:500px;
+    bottom: 0;
+	right: 0;
+	width: 230px;
+	background-color: #fff;
+	color: #7F7F7F;
+	padding: 20px;
+	border: 2px solid #ccc;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	-moz-box-shadow: 0 1px 5px #333;
+	-webkit-box-shadow: 0 1px 5px #333;
+	z-index: 101;
+}
+</style>
+</head>
+<body>
+
+請輸入亂數表的編號：<input type="text" id="txtSeed" value="1234" />
+&nbsp;<input type="button" id="btnGo" value="產生亂數表" />
+
+<div id="randomTable">
+
+
+
+
+
+</div>
+
+<script>
+
+$("#btnGo").click(function () {
+    var result = "";
+	// 純數字:
+	var sPool = "0123456789";
+    // 數字+小寫字母: (去除 l, o)
+    // var sPool = "abcdefghijkmnpqrstuvwxyz0123456789";
+    // 數字+大小寫字母: (去除 I, O, l, o)
+    // var sPool = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz0123456789";
+
+    Math.seedrandom($("#txtSeed").val()); // 設定亂數種子
+	var iRandom = 0; var ch = "?";
+	for (iRow = 1; iRow <= 10; iRow++) {
+		var sLine = (iRow + 100).toString().substr(1, 2) + ": ";
+		for (iCol = 1; iCol <= 10; iCol++) {
+			iRandom = Math.floor(Math.random() * sPool.length);
+			ch = sPool.substr(iRandom, 1);
+			sLine += ch;
+		}
+		result += sLine + "<br>";
+	}
+	$("#randomTable").html(result);
+});
+
+</script>
+    <div class="box" id="box">
+        
+        <h1>使用說明</h1>
+        <p>
+            <ul>
+                <li>請在框中輸入一組數字</li>
+                <li>點選產生亂數表按鈕</li>
+                <li>依產生的亂數表</li>
+
+
+            </ul>
+        </p>
+    </div>
+
+</body>
+</html>
